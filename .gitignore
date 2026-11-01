@@ -1,0 +1,8 @@
+# Build output (the VPK is published as a GitHub Release asset)
+build/
+
+# Valve game files and third-party tools: not ours to redistribute
+extracted/
+decompiled/
+reference/
+tools/s2v/
