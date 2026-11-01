@@ -1,7 +1,8 @@
 # Maintenance runbook
 
 How this mod works, what it depends on in the game, and how to fix it fast when a Deadlock update breaks it.
-For the research history behind these decisions, see [`NOTES.md`](NOTES.md).
+For the research history behind these decisions, see [`NOTES.md`](NOTES.md). Known issues and planned fixes for
+the next update: [`BACKLOG.md`](BACKLOG.md).
 
 - **Built against:** Deadlock ClientVersion **6839** (Oct 31 2026), mod **v1.0.0**
 - **Live:** [GitHub release](https://github.com/PassionateRain/deadlock-remember-party-lane-preference-mod/releases) ·
@@ -136,7 +137,8 @@ Keep `vconsole2.exe` open with filter `RPLP`.
 
 ## 7. Release checklist
 
-1. Bump the version (`v1.0.1` for fixes): README "Built against", release notes, GameBanana Version field.
+1. Pick up open items from [`BACKLOG.md`](BACKLOG.md); move shipped ones to "Done" with the version.
+   Bump the version (`v1.0.1` for fixes): README "Built against", release notes, GameBanana Version field.
 2. Commit + push source.
 3. `gh release create vX.Y.Z build\remember_party_lane_preference.vpk --title vX.Y.Z --notes-file <notes>`.
    Include the SHA-256 of the VPK in the notes.
