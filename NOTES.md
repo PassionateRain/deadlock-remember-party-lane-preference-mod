@@ -88,7 +88,9 @@ Test steps:
   closes via `Activated` on `#EscapeButton` after 0.4 s. Skipped while ESC menu is open or button disabled.
 - Apply always produces a real selection change: if the target is already selected, flip to the other option
   and back (`applying` flag keeps the flip out of the remembered choice).
-- Untested in game (2026-11-01): auto-apply open/close via `Activated`, flicker, non-leader behaviour.
+- In-game results (2026-11-01, as party leader): indicator hidden solo, appears after a friend joins
+  (auto-apply works), choice survives a game restart. Only the party leader can change the lane preference
+  (dropdown disabled for members); non-leader path (`blockedEpoch`) not yet tested in game.
 
 ## Cross-session storage research (2026-11-01)
 - No lane-preference convar exists (client.dll only has `lanepreference_` / `LanePreferenceSelector`).
