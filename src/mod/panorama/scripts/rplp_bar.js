@@ -41,6 +41,8 @@
     var withParty = ctx.FindChildTraverse('RplpWithParty');
     var balanced = ctx.FindChildTraverse('RplpBalanced');
 
+    // Solo, nothing can be confirmed (the party's setting doesn't exist yet), so this is null and the
+    // indicator stays hidden.
     function confirmedValue() {
         var c = state.confirmed;
         return state.inParty && c && c.epoch === state.epoch ? c.value : null;
