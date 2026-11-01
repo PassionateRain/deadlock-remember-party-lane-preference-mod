@@ -95,7 +95,12 @@
 
     // The game initialises the dropdown during popup creation; act one tick later so we land after it.
     $.Schedule(0.05, function () {
-        if (state.remember) {
+        if (dd.enabled === false) {
+            // Only the party leader can change the lane preference; nothing to apply for this party.
+            state.blockedEpoch = state.epoch;
+            state.confirmed = null;
+            refreshBar();
+        } else if (state.remember) {
             apply();
         } else {
             // The game just reset the dropdown on open; we can't tell whether that changed the real setting.

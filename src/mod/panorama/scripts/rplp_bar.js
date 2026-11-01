@@ -145,7 +145,8 @@
     var loadWaitTicks = 0;
 
     function needsApply() {
-        return state.remember && state.inParty && confirmedValue() === null && attempts < MAX_APPLY_ATTEMPTS;
+        return state.remember && state.inParty && confirmedValue() === null && attempts < MAX_APPLY_ATTEMPTS &&
+            state.blockedEpoch !== state.epoch; // the popup found the dropdown disabled (not party leader)
     }
 
     function tryAutoApply() {
