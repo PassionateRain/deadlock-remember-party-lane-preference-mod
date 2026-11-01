@@ -19,7 +19,8 @@ so you don't have to switch it back every time you open the party popup.
 2. Add it in **Deadlock Mod Manager** (or another mod manager) and enable it.
 3. Restart Deadlock.
 
-Client-side UI change only: it doesn't touch gameplay, memory or the network.
+Client-side UI change only: it doesn't touch gameplay or game memory. Its only network use is loading its
+small storage page from GitHub Pages (see below).
 
 ## How saving works
 

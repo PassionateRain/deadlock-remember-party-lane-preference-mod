@@ -1,0 +1,40 @@
+<!-- xml reconstructed by Source 2 Viewer 20.1.0.0 - https://valveresourceformat.github.io -->
+<root>
+	<styles>
+		<include src="s2r://panorama/styles/citadel_base_styles.vcss" />
+		<include src="s2r://panorama/styles/citadel_party.vcss" />
+	</styles>
+	<scripts>
+		<include src="s2r://panorama/scripts/rplp_bar.vjs_c" />
+	</scripts>
+	<snippets>
+		<snippet name="PartyMember">
+			<Panel class="PartyMember">
+				<CitadelAvatarImage id="AvatarImage" />
+				<CitadelHeroImage id="HeroImage" heroimagestyle="icon" />
+				<Panel class="EmptyImage" onmouseover="CitadelUIShowTextTooltip( &apos;#Citadel_JoinOrCreateParty_SelectAddFriend&apos; )" onmouseout="CitadelUIHideTextTooltip()" onactivate="CitadelEditParty()" />
+			</Panel>
+		</snippet>
+	</snippets>
+	<CitadelParty>
+		<Panel class="PartyList">
+			<Button id="JoinCreateParty" onactivate="CitadelShowJoinOrCreatePartyPopup()" oncontextmenu="CitadelCopyPartyCode()" />
+			<Panel class="PartyMembersSection">
+				<Panel id="PartyMembersList" />
+			</Panel>
+			<Panel id="LocalPlayer" />
+		</Panel>
+		<Panel id="RplpIndicator" hittest="true" style="flow-children: right; horizontal-align: right; margin: -8px 16px 6px 0px;" onactivate="CitadelShowJoinOrCreatePartyPopup()" onmouseover="CitadelUIShowTextTooltip( &apos;#Citadel_LanePreference_Title&apos; )" onmouseout="CitadelUIHideTextTooltip()">
+			<Panel style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; wash-color: #E4D5BF; opacity: 0.8; background-image: url(&quot;s2r://panorama/images/icons/icon_lanes.vsvg&quot;); background-size: contain; background-repeat: no-repeat; background-position: center;" />
+			<Label id="RplpWithParty" text="#Citadel_LanePreference_WithParty" style="font-size: 18px; color: #E4D5BF; font-weight: black; text-transform: uppercase; vertical-align: middle;" />
+			<Label id="RplpBalanced" text="#Citadel_LanePreference_BalancedLanes" style="font-size: 18px; color: #E4D5BF; font-weight: black; text-transform: uppercase; vertical-align: middle;" />
+		</Panel>
+		<Panel class="FriendsCountContainer" hittest="false">
+			<Panel class="FriendsCount" onmouseover="CitadelUIShowTextTooltip( &apos;#Citadel_JoinOrCreateParty_FriendsInGame:f&apos; )" onmouseout="CitadelUIHideTextTooltip()" onactivate="CitadelEditParty()">
+				<Panel class="FriendsIcon" />
+				<Label class="PlayWithFriendsCount" text="{d:friend_count}" />
+			</Panel>
+		</Panel>
+		<CitadelHTMLPanel id="RplpStore" hittest="false" acceptsfocus="false" style="width: 2px; height: 2px; opacity: 0;" />
+	</CitadelParty>
+</root>

@@ -1,0 +1,68 @@
+<!doctype html>
+<!--
+  Storage page for the "Remember Party Lane Preference" Deadlock mod.
+  The mod loads this page in a hidden in-game browser panel and keeps two values in localStorage
+  (in Steam's browser profile on this PC), because Deadlock's UI scripts have no storage of their own.
+
+  Request:  the mod changes the URL fragment to  #<encodeURIComponent(JSON)>
+            {"i": <id>, "op": "get"}                                   read saved values
+            {"i": <id>, "op": "set", "remember": bool, "choice": str}  save values
+  Reply:    document.title = "RPLP1:" + JSON  {"i": <id>, "ok": bool, "remember": bool|null, "choice": str|null}
+
+  The CSP below blocks all network access: this page never sends anything anywhere.
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'">
+<title>RPLP1:loading</title>
+</head>
+<body>
+<script>
+(function () {
+    var PREFIX = 'RPLP1:';
+    var KEY = 'rplp.v1';
+    var CHOICES = { lanepreference_0: true, lanepreference_1: true };
+    var lastHash = null;
+
+    function reply(obj) { document.title = PREFIX + JSON.stringify(obj); }
+
+    function load() {
+        try {
+            var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+            if (saved && typeof saved.remember === 'boolean' && CHOICES[saved.choice]) return saved;
+        } catch (e) { }
+        return null;
+    }
+
+    function handle() {
+        var hash = location.hash.slice(1);
+        if (!hash || hash === lastHash) return;
+        lastHash = hash;
+
+        var msg;
+        try { msg = JSON.parse(decodeURIComponent(hash)); } catch (e) { return; }
+        if (!msg || typeof msg.i !== 'number') return;
+
+        try {
+            if (msg.op === 'set') {
+                if (typeof msg.remember !== 'boolean' || !CHOICES[msg.choice]) {
+                    return reply({ i: msg.i, ok: false, remember: null, choice: null });
+                }
+                localStorage.setItem(KEY, JSON.stringify({ remember: msg.remember, choice: msg.choice }));
+            }
+            if (msg.op === 'set' || msg.op === 'get') {
+                var saved = load();
+                reply({ i: msg.i, ok: true, remember: saved ? saved.remember : null, choice: saved ? saved.choice : null });
+            }
+        } catch (e) {
+            reply({ i: msg.i, ok: false, remember: null, choice: null });
+        }
+    }
+
+    window.addEventListener('hashchange', handle);
+    handle();
+})();
+</script>
+</body>
+</html>
