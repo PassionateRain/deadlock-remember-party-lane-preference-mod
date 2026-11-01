@@ -8,8 +8,11 @@ so you don't have to switch it back every time you open the party popup.
 - **"Remember my choice" checkbox** in the party popup, under the *Lane preference* dropdown.
   While it's checked, the popup re-selects your remembered choice every time it opens
   (the game itself always resets it to *Balanced*).
-- **Lane preference indicator** under the party avatars on the main menu, showing *With Party* or *Balanced*.
-  Hover for a tooltip, click to open the party popup.
+- **Applied automatically** when someone joins or leaves your party: the mod opens the party popup invisibly
+  through the game's own button, selects your choice in the game's own dropdown, and closes it.
+- **Confirmed-only indicator** under the party avatars, showing *With Party* or *Balanced* only once the
+  game's lane dropdown has actually been set to that value for your current party. Solo, right after a party
+  change, or if applying failed, it stays hidden instead of guessing. Hover for a tooltip, click to open the popup.
 - **Remembered across game restarts.** Defaults to *With Party* with the checkbox on.
 - Uses the game's own text (all languages), icons and checkbox style. No new art.
 
@@ -36,9 +39,17 @@ keeps your two settings in its `localStorage` (Steam's browser profile, on your 
 
 ## Limitations
 
-- The game only receives your choice when the party popup is opened at least once in a session.
-- The indicator shows what the mod applied, not a value read from Valve's servers.
-- Game updates can break UI mods. If the party popup changes, this mod needs a rebuild.
+- The game never reports the lane preference back to the UI. "Confirmed" means the game's own dropdown fired
+  its change event with that value for your current party; if another party member changes the setting from
+  their client, this mod can't see it.
+- If the game disables the dropdown (e.g. you aren't allowed to change it), nothing is applied and the
+  indicator stays hidden. Auto-apply waits while the ESC menu is open or you're in queue.
+- Auto-apply may show a brief background dim while the invisible popup opens and closes.
+- Saving needs the storage page (GitHub Pages) to load; offline, that session uses the defaults.
+- Some mod scanners flag mods that use the in-game browser panel. This one only loads its own page, which
+  blocks all network access; the source is here to check.
+- Game updates can break UI mods. If the party popup or party bar changes, this mod needs a rebuild.
+- Conflicts with other mods that replace `citadel_party` or `popup_join_or_create_party` layouts.
 
 ## Build from source
 

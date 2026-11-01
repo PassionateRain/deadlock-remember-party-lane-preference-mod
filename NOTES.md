@@ -77,10 +77,18 @@ Test steps:
   (`https://passionaterain.github.io/deadlock-remember-party-lane-preference-mod/`). `rplp_bar.js` sends
   `{op:get}` on load (3 tries, 5 s apart), `{op:set,remember,choice}` on change; replies arrive as page title
   `RPLP1:{...}` via the `HTMLTitle` event. No writes until the read completes; a change made before that wins.
-- Shared state on the UI root: `root.Rplp` {remember, choice, current, loaded, dirty}; callbacks
-  `root.RplpRefresh`, `root.RplpSave`.
-- Known gap: settings apply only when the popup is opened; the indicator shows what the mod remembers/applied,
-  not a value read from the server.
+- Shared state on the UI root: `root.Rplp` {remember, choice, loaded, dirty, inParty, epoch, confirmed,
+  autoApply}; callbacks `root.RplpRefresh`, `root.RplpSave`.
+- Confirmed-only indicator: `confirmed = {value, epoch}` is set only in the popup's `DropDownSelectionChanged`
+  handler while in a party and `dd.enabled !== false`. Party member count change (polled 1 s) or party bar
+  reload bumps `epoch`; opening the popup with remember off clears `confirmed`. Indicator hidden unless
+  `confirmed.epoch === epoch`.
+- Auto-apply: when remember is on, in a party and unconfirmed (max 2 attempts per epoch), the bar dispatches
+  `Activated` on `#JoinCreateParty`; the popup sees `state.autoApply` (< 3 s old), sets opacity 0, applies,
+  closes via `Activated` on `#EscapeButton` after 0.4 s. Skipped while ESC menu is open or button disabled.
+- Apply always produces a real selection change: if the target is already selected, flip to the other option
+  and back (`applying` flag keeps the flip out of the remembered choice).
+- Untested in game (2026-11-01): auto-apply open/close via `Activated`, flicker, non-leader behaviour.
 
 ## Cross-session storage research (2026-11-01)
 - No lane-preference convar exists (client.dll only has `lanepreference_` / `LanePreferenceSelector`).
