@@ -62,7 +62,8 @@ to decompile game files.
 ```
 
 Output: `build\remember_party_lane_preference.vpk`. Packing uses the included `tools\vpkpack.ps1`
-(CS2 doesn't ship `vpk.exe`). Implementation notes are in [`NOTES.md`](NOTES.md).
+(CS2 doesn't ship `vpk.exe`). Maintenance runbook (what breaks after game updates and how to fix it):
+[`MAINTENANCE.md`](MAINTENANCE.md). Research notes: [`NOTES.md`](NOTES.md).
 
 Source layout:
 
@@ -73,7 +74,7 @@ Source layout:
 | `src/mod/panorama/scripts/rplp_popup.js` | Re-applies the remembered choice when the popup opens |
 | `src/mod/panorama/scripts/rplp_bar.js` | Indicator and saving/loading |
 | `docs/index.html` | Storage page (GitHub Pages) |
-| `tools/` | VPK reader, packer and build script |
+| `tools/` | Build script, VPK reader/packer, `check-game-update.ps1` (run after Deadlock updates) |
 
 ## AI disclosure
 

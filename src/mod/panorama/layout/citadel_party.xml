@@ -1,9 +1,11 @@
 <!-- xml reconstructed by Source 2 Viewer 20.1.0.0 - https://valveresourceformat.github.io -->
+<!-- Remember Party Lane Preference: Valve's layout + our additions, each marked "RPLP". See MAINTENANCE.md. -->
 <root>
 	<styles>
 		<include src="s2r://panorama/styles/citadel_base_styles.vcss" />
 		<include src="s2r://panorama/styles/citadel_party.vcss" />
 	</styles>
+	<!-- RPLP: script include -->
 	<scripts>
 		<include src="s2r://panorama/scripts/rplp_bar.vjs_c" />
 	</scripts>
@@ -24,6 +26,7 @@
 			</Panel>
 			<Panel id="LocalPlayer" />
 		</Panel>
+		<!-- RPLP: lane preference indicator (own row under the avatars) -->
 		<Panel id="RplpIndicator" hittest="true" style="flow-children: right; horizontal-align: right; margin: -8px 16px 6px 0px;" onactivate="CitadelShowJoinOrCreatePartyPopup()" onmouseover="CitadelUIShowTextTooltip( &apos;#Citadel_LanePreference_Title&apos; )" onmouseout="CitadelUIHideTextTooltip()">
 			<Panel style="width: 20px; height: 20px; vertical-align: middle; margin-right: 6px; wash-color: #E4D5BF; opacity: 0.8; background-image: url(&quot;s2r://panorama/images/icons/icon_lanes.vsvg&quot;); background-size: contain; background-repeat: no-repeat; background-position: center;" />
 			<Label id="RplpWithParty" text="#Citadel_LanePreference_WithParty" style="font-size: 18px; color: #E4D5BF; font-weight: black; text-transform: uppercase; vertical-align: middle;" />
@@ -35,6 +38,7 @@
 				<Label class="PlayWithFriendsCount" text="{d:friend_count}" />
 			</Panel>
 		</Panel>
+		<!-- RPLP: hidden browser panel for settings storage -->
 		<CitadelHTMLPanel id="RplpStore" hittest="false" acceptsfocus="false" style="width: 2px; height: 2px; opacity: 0;" />
 	</CitadelParty>
 </root>

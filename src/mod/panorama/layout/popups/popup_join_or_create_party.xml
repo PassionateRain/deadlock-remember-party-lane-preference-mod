@@ -1,10 +1,12 @@
 <!-- xml reconstructed by Source 2 Viewer 20.1.0.0 - https://valveresourceformat.github.io -->
+<!-- Remember Party Lane Preference: Valve's layout + our additions, each marked "RPLP". See MAINTENANCE.md. -->
 <root>
 	<styles>
 		<include src="s2r://panorama/styles/citadel_base_styles.vcss" />
 		<include src="s2r://panorama/styles/popups/popups_shared.vcss" />
 		<include src="s2r://panorama/styles/popups/popup_join_or_create_party.vcss" />
 	</styles>
+	<!-- RPLP: script include -->
 	<scripts>
 		<include src="s2r://panorama/scripts/rplp_popup.vjs_c" />
 	</scripts>
@@ -56,6 +58,7 @@
 							<Label id="lanepreference_0" value="0" text="#Citadel_LanePreference_BalancedLanes" onmouseover="UIShowTextTooltipStyled( #Citadel_LanePreference_Balanced_Desc , OptionsTooltip)" onmouseout="UIHideTextTooltip()" />
 							<Label id="lanepreference_1" value="1" text="#Citadel_LanePreference_WithParty" onmouseover="UIShowTextTooltipStyled( #Citadel_LanePreference_Party_Desc , OptionsTooltip)" onmouseout="UIHideTextTooltip()" />
 						</DropDown>
+						<!-- RPLP: "Remember my choice" checkbox -->
 						<ToggleButton id="RplpRemember" text="Remember my choice" style="horizontal-align: right; margin-top: 12px;" onactivate="$.GetContextPanel().RplpToggleRemember()" />
 					</Panel>
 				</Panel>

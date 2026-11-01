@@ -5,4 +5,5 @@ build/
 extracted/
 decompiled/
 reference/
+vanilla/
 tools/s2v/
